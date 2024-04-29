@@ -5,9 +5,9 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import Homepage from './pages/homepage/Homepage';
-import Loginpage from './pages/login/Login';
-import Register from './pages/register/Register';
+import Homepage from './pages/Homepage/Homepage';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path='/' element={<Homepage/>} />
-        <Route path='/Loginpage' element={<Loginpage/>} />
+        <Route path='/Login' element={<Login/>} />
         <Route path='/Register' element={<Register/>} />
 
       </Routes>
