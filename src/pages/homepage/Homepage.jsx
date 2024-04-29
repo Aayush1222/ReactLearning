@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Homepagee = () => {
+const Homepage = () => {
     return(
         <div>
             Homepage
@@ -11,4 +11,4 @@ const Homepagee = () => {
 }
 
 //exporting
-export default Homepagee;
+export default Homepage;
