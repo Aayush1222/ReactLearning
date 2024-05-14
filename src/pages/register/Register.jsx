@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { registerUserApi } from "../../apis/Api";
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   // Conding Section
@@ -89,7 +91,13 @@ const Register = () => {
 
     }
     registerUserApi(data).then((res) =>{
-      console.log(res.data)
+      
+      //Success : true/false, Message
+      if(res.data.success === false){
+        toast.error(res.data.message)
+      } else {
+        toast.success(res.data.message)
+      }
     })
 
 
