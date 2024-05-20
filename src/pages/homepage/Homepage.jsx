@@ -1,31 +1,21 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { testApi } from "../../apis/Api";
 
-
 const Homepage = () => {
-//Print Hello after page load, Automatic
-
-useEffect(() => {
-    console.log("Hello!")
-
-    //calling test api
+  //print hello after page load, Automatic
+  useEffect(() => {
+    console.log("Hello!!");
+    //calling test API
     testApi().then((res) => {
-        console.log(res)
-    })
-    
+      console.log(res);
+    });
+  });
+  return (
+    <div>
+      <h1>Its Homepage</h1>
+    </div>
+  );
+};
 
-})
-
-
-
-
-    return(
-        <div>
-            Homepage
-        </div>
-
-    );
-}
-
-//exporting
+//exporitng
 export default Homepage;

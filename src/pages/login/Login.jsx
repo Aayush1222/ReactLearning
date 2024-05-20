@@ -1,4 +1,6 @@
 import React,{useState} from "react";
+import { loginUserApi } from "../../apis/Api";
+import { toast } from "react-toastify";
 
 const Login = () => {
 //use state
@@ -37,8 +39,33 @@ const handleLogin = (e) => {
         return;
     }
 
-    console.log(email,password)
-}
+    const data = {
+        "email" : email,
+        "password" : password
+      }
+
+      //Making api same as register
+      loginUserApi(data).then((res) =>{
+        
+        //Success : true/false, Message
+        if(res.data.success === false){
+          toast.error(res.data.message)
+        } else {
+          toast.success(res.data.message)
+
+          //Received data : success, message,token,userData
+
+          //1. Set token
+          localStorage.setItem('token',res.data.token)
+
+          //2. Convert json object
+          const convertedData = JSON.stringify(res.data.userData)
+
+          //3. Set user data in local storage
+          localStorage.setItem('user',convertedData)
+        }
+      })
+    }
 
 
 
