@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const AdminDashboard = () => {
+
+    //Make a state for product
+    const [productName, setProductName] = useState('')
+    const [productPrice, setProductPrice] = useState('')
+    const [productCategory, setProductCategory] = useState('')
+    const [productDescription, setProductDescription] = useState('')
+    const [productImage, setProductImage] = useState('')
+
+
+
     return (
         <>
             <div className='container'>
                 <div className='d-flex justify-content-between mt-2'>
                     <h2>Admin Dashboard</h2>
-                    
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Launch demo modal
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Add Product
                     </button>
 
-                  
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -20,7 +29,36 @@ const AdminDashboard = () => {
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    ...
+                                    <form action="">
+                                        <label> Product Name</label>
+                                        <input onChange={(e) => setProductName(e.target.value)} type='text' className='form-control' placeholder='Enter product Name'></input>
+
+                                        <label className='mt-2'>Product Price</label>
+                                        <input onChange={(e) => setProductPrice(e.target.value)} type='text' className='form-control' placeholder='Enter product Price'></input>
+
+                                        <div className='mt-2'>
+                                            <label>Select Category</label>
+                                            <select className='form-control'>
+                                                <option value="plants">Plants</option>
+                                                <option value="gadgets">Gadgets</option>
+                                                <option value="mobile">Mobile</option>
+                                                <option value="electronics">Electronics</option>
+
+
+
+                                            </select>
+                                        </div>
+
+                                        <label className='mt-2'>Type product description</label>
+                                        <textarea className='form-control'></textarea>
+
+                                        <label className='mt-2'>Product Image</label>
+                                        <input type='file' className='form-control'/>
+
+
+
+
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -48,7 +86,7 @@ const AdminDashboard = () => {
                     <tbody>
                         <tr>
                             <td>
-                                <img height={'40px'} width={'40px'} src='https://www.pexels.com/photo/close-photography-of-red-and-pink-rose-56866/' alt='' />
+                                <img height={'40px'} width={'40px'} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnAYKgQRDPyZUWjDzDpdmcg55hoRQ1pFOyQGa6FhAJlQ&s' alt='' />
                             </td>
                             <td>SunFlower</td>
                             <td>NPR.200</td>
