@@ -7,7 +7,22 @@ const AdminDashboard = () => {
     const [productPrice, setProductPrice] = useState('')
     const [productCategory, setProductCategory] = useState('')
     const [productDescription, setProductDescription] = useState('')
-    const [productImage, setProductImage] = useState('')
+
+    //Image state
+    const [productImage, setProductImage] = useState(null)
+    const [previewImage, setPreviewImage] = useState(null)
+
+    //function to upload and preview image
+    const handleImageUpload = (event) => {
+
+        //0-file,1-name,2-Size
+        const file = event.target.files[0]
+        setProductImage(file)
+        setPreviewImage(URL.createObjectURL(file))
+    } 
+
+
+
 
 
 
@@ -53,7 +68,16 @@ const AdminDashboard = () => {
                                         <textarea className='form-control'></textarea>
 
                                         <label className='mt-2'>Product Image</label>
-                                        <input type='file' className='form-control'/>
+                                        <input onChange={handleImageUpload} type='file' className='form-control'/>
+
+                                        {/* preview Image */}
+                                        {
+                                            previewImage && (
+                                                <div className=''>
+                                                    <img src={previewImage} alt="preview image" className='img-fluid rounded object-fit-cover mt-3'/>
+                                                </div>
+                                            )
+                                        }
 
 
 
