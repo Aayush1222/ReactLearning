@@ -1,6 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { createProductApi, getAllProducts } from '../../apis/Api'
+import { toast } from 'react-toastify'
 
 const AdminDashboard = () => {
+
+
+    //logic for get products
+    const [products, setProducts] = useState([])
+    // Hit API (Get All Product) Auto -> useEffect (list of products)
+    useEffect(() => {
+        getAllProducts().then((res) => {
+            // success, message , list of products(product)
+            console.log(res.data.products)
+            setProducts(res.data.products)
+
+
+        }).catch((error) =>{
+            console.log(error)
+        })
+    }, [])
+
+    //Make a state to save (Array format)
+    // Table row (pn, pp, pd)
+
+
 
     //Make a state for product
     const [productName, setProductName] = useState('')
@@ -20,6 +43,51 @@ const AdminDashboard = () => {
         setProductImage(file)
         setPreviewImage(URL.createObjectURL(file))
     } 
+
+    //handle submit
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(productName,productPrice,productCategory,productDescription,productImage)
+
+        // make a logical form data
+        const formData = new FormData()
+        formData.append('productName', productName)
+        formData.append('productPrice', productPrice)
+        formData.append('productCategory', productCategory)
+        formData.append('productDescription', productDescription)
+        formData.append('productImage', productImage)
+
+
+        //make api call/request
+        createProductApi(formData).then((res)=>{
+            if(res.status === 201){
+                toast.success(res.data.message)
+            } else{
+                toast.error("something went wrong in frontend")
+            }
+
+
+        }).catch((error) => {
+
+            if(error.response){
+                if(error.response.status === 400){
+                    toast.error(error.response.data.message)
+                }
+
+                // space for 401 error
+
+            } else if (error.response.status === 500){
+                toast.error("Internal Server Error")
+
+            } else {
+                toast.error("No response!!")
+            }
+            
+
+        })
+
+
+    }
 
 
 
@@ -53,7 +121,9 @@ const AdminDashboard = () => {
 
                                         <div className='mt-2'>
                                             <label>Select Category</label>
-                                            <select className='form-control'>
+                                            <select 
+                                             onChange= {(e)=> setProductCategory(e.target.value)}
+                                             className='form-control'>
                                                 <option value="plants">Plants</option>
                                                 <option value="gadgets">Gadgets</option>
                                                 <option value="mobile">Mobile</option>
@@ -65,7 +135,9 @@ const AdminDashboard = () => {
                                         </div>
 
                                         <label className='mt-2'>Type product description</label>
-                                        <textarea className='form-control'></textarea>
+                                        <textarea 
+                                        onChange={(e)=>setProductDescription(e.target.value)}
+                                        className='form-control'></textarea>
 
                                         <label className='mt-2'>Product Image</label>
                                         <input onChange={handleImageUpload} type='file' className='form-control'/>
@@ -86,7 +158,7 @@ const AdminDashboard = () => {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button onClick={handleSubmit} type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -108,14 +180,16 @@ const AdminDashboard = () => {
 
                     </thead>
                     <tbody>
-                        <tr>
+                        {
+                        products.map((singleProduct) => (
+                            <tr>
                             <td>
-                                <img height={'40px'} width={'40px'} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnAYKgQRDPyZUWjDzDpdmcg55hoRQ1pFOyQGa6FhAJlQ&s' alt='' />
+                                <img height={'40px'} width={'40px'} src={`http://localhost:8000/products/${singleProduct.productImage}`} alt='' />
                             </td>
-                            <td>SunFlower</td>
-                            <td>NPR.200</td>
-                            <td>Plants</td>
-                            <td>Imported from Canada</td>
+                            <td>{singleProduct.productName}</td>
+                            <td>NPR.{singleProduct.productPrice}</td>
+                            <td>{singleProduct.productCategory}</td>
+                            <td>{singleProduct.productDescription}</td>
                             <td>
                                 <div className='btn-group' role='group'>
                                     <button className='btn btn-success'>Edit</button>
@@ -124,6 +198,12 @@ const AdminDashboard = () => {
                                 </div>
                             </td>
                         </tr>
+                        ))
+                        }
+
+
+
+
                     </tbody>
 
 
@@ -135,3 +215,8 @@ const AdminDashboard = () => {
 }
 
 export default AdminDashboard
+
+//products (Array) [{pp1,pn1}, {pp2,pn2}]
+// Array mapping (Table)
+// products (product)
+//pp1()

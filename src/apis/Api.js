@@ -5,7 +5,7 @@ import axios from "axios";
     baseURL : "http://localhost:8000",
     withCredentials : true,
     headers : {
-        "content-Type" : "application/json"
+        "content-Type" : "multipart/form-data"
     }
 
   });
@@ -20,3 +20,9 @@ export const registerUserApi = (data) => Api.post('/api/user/create',data)
 
 //creating login api
 export const loginUserApi = (data) => Api.post('api/user/login',data)
+
+// create product create api
+export const createProductApi = (data) => Api.post('/api/product/create',data)
+
+// fetch all products
+export const getAllProducts = () => Api.get('/api/product/get_all_products')
