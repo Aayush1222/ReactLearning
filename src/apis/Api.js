@@ -30,3 +30,6 @@ export const getAllProducts = () => Api.get('/api/product/get_all_products')
 //fetch single product
 export const getSingleProduct = (id) => Api.get(`/api/product/get_single_product/${id}`)
 
+
+export const deleteProduct = (id) => Api.delete(`/api/product/delete_product/${id}`)
+
