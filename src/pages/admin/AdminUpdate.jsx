@@ -62,23 +62,16 @@ const AdminUpdate = () => {
 
                     </form>
                     <div className='image section'>
-                        <h1>Image</h1>
+                        <h6>Old Image Preview</h6>
+                        <img className = 'img-fluid object-fit-cover rounded-4' height={'100px'} width={'100px'} src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ718nztPNJfCbDJjZG8fOkejBnBAeQw5eAUA&s"></img>
+
+                        {
+                            previewNewImage && <div> 
+                                <h6>New Image Preview</h6>
+                                <img className = 'img-fluid object-fit-cover rounded-4' height={'300px'} width={'300px'} src ={previewNewImage}></img>
+                            </div>
+                        }
                     </div>
-
-                    <h6>Old Image Preview</h6>
-                    <img className='img-fluid object-fit-cover rounded-4' height={'200px'} width={'200px'} src='https://static6.depositphotos.com/1167801/651/i/450/depositphotos_6517777-stock-photo-rainbow-of-colorful-boxes.jpg' alt=''/>
-
-                    {
-                        previewNewImage && (<div>
-                            <h6>
-                                New Image Preview
-                            </h6>
-                            <img className='img-fluid object-fit-cover rounded-4' height={'200px'} width={'200px'} src={previewNewImage} alt=""/>
-                        </div>)
-                    }
-
-
-
                 </div>
 
             </div>
@@ -86,4 +79,4 @@ const AdminUpdate = () => {
     )
 }
 
-export default AdminUpdate
+export default AdminUpdate;
